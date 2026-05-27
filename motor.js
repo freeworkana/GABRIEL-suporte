@@ -378,43 +378,35 @@
 
   if (autoVideos.length) {
 
-    // Controla qual vídeo está com som ativo
-    var activeVideo = null;
-
-    // Quando o usuário clica em play: ativa som neste e muta os demais
+    // Marca se o play foi iniciado pelo scroll (não pelo usuário)
     autoVideos.forEach(function (vid) {
+      vid._byScroll = false;
+
       vid.addEventListener('play', function () {
+        if (vid._byScroll) return; // foi o scroll, não faz nada
+        // Usuário clicou play: ativa som neste e muta/pausa os demais
+        vid.muted = false;
         autoVideos.forEach(function (other) {
           if (other !== vid) {
             other.muted = true;
             other.pause();
           }
         });
-        // Só ativa o som se o usuário iniciou (não foi o autoplay do scroll)
-        if (!vid._scrollPlay) {
-          vid.muted = false;
-        }
-        vid._scrollPlay = false;
-        activeVideo = vid;
-      });
-
-      vid.addEventListener('pause', function () {
-        if (activeVideo === vid) activeVideo = null;
       });
     });
 
-    // Autoplay mudo ao rolar
+    // Autoplay mudo ao rolar — todos os vídeos tocam simultaneamente
     const videoObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         const vid = entry.target;
         if (entry.isIntersecting) {
           vid.muted = true;
-          vid._scrollPlay = true;
-          vid.play().catch(function () {});
+          vid._byScroll = true;
+          vid.play().catch(function () {}).then(function () {
+            vid._byScroll = false;
+          });
         } else {
-          if (activeVideo !== vid) {
-            vid.pause();
-          }
+          vid.pause();
         }
       });
     }, { threshold: 0.4 });
