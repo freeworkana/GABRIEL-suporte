@@ -373,4 +373,24 @@
     animateCursor();
   }
 
+  // ── Autoplay de vídeos ao entrar na tela ──
+  const autoVideos = document.querySelectorAll('.autoplay-video');
+
+  if (autoVideos.length) {
+    const videoObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        const vid = entry.target;
+        if (entry.isIntersecting) {
+          vid.play().catch(function () {});
+        } else {
+          vid.pause();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    autoVideos.forEach(function (vid) {
+      videoObserver.observe(vid);
+    });
+  }
+
 })();
