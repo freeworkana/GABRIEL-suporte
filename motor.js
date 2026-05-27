@@ -377,13 +377,44 @@
   const autoVideos = document.querySelectorAll('.autoplay-video');
 
   if (autoVideos.length) {
+
+    // Controla qual vídeo está com som ativo
+    var activeVideo = null;
+
+    // Quando o usuário clica em play: ativa som neste e muta os demais
+    autoVideos.forEach(function (vid) {
+      vid.addEventListener('play', function () {
+        autoVideos.forEach(function (other) {
+          if (other !== vid) {
+            other.muted = true;
+            other.pause();
+          }
+        });
+        // Só ativa o som se o usuário iniciou (não foi o autoplay do scroll)
+        if (!vid._scrollPlay) {
+          vid.muted = false;
+        }
+        vid._scrollPlay = false;
+        activeVideo = vid;
+      });
+
+      vid.addEventListener('pause', function () {
+        if (activeVideo === vid) activeVideo = null;
+      });
+    });
+
+    // Autoplay mudo ao rolar
     const videoObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         const vid = entry.target;
         if (entry.isIntersecting) {
+          vid.muted = true;
+          vid._scrollPlay = true;
           vid.play().catch(function () {});
         } else {
-          vid.pause();
+          if (activeVideo !== vid) {
+            vid.pause();
+          }
         }
       });
     }, { threshold: 0.4 });
