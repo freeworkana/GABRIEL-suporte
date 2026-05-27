@@ -939,6 +939,70 @@ ul { list-style: none; }
   letter-spacing: 0.04em;
 }
 
+/* ── Videos section ── */
+.section-videos { background: var(--bg); }
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.video-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+  transition: transform var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+
+.video-card:hover { transform: translateY(-8px); }
+
+.video-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: 20px 20px 0;
+  padding: 4px 12px;
+  background: var(--gold-dim);
+  border: 1px solid var(--border-gold);
+  border-radius: 100px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.video-card video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  margin-top: 14px;
+  background: #000;
+}
+
+.video-info {
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.video-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.video-info p {
+  font-size: 0.84rem;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+
 /* ── Differentials section ── */
 .diff-grid {
   display: grid;
@@ -1374,6 +1438,7 @@ textarea { resize: vertical; min-height: 108px; }
   .about-grid   { gap: 56px; }
   .contact-grid { gap: 56px; }
   .tech-grid    { grid-template-columns: repeat(2, 1fr); }
+  .videos-grid  { grid-template-columns: repeat(2, 1fr); }
   .diff-grid    { grid-template-columns: repeat(2, 1fr); }
   .footer-grid  { grid-template-columns: 1fr 1fr; gap: 44px; }
 }
@@ -1387,6 +1452,7 @@ textarea { resize: vertical; min-height: 108px; }
   .about-grid   { grid-template-columns: 1fr; gap: 48px; }
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .tech-grid    { grid-template-columns: 1fr; }
+  .videos-grid  { grid-template-columns: 1fr; }
   .diff-grid    { grid-template-columns: 1fr; }
   .footer-grid  { grid-template-columns: 1fr; gap: 36px; }
 
