@@ -1448,13 +1448,17 @@ textarea { resize: vertical; min-height: 108px; }
   .nav-links, .nav-cta { display: none; }
   .nav-toggle          { display: flex; }
 
-  .nav-logo-img    { height: 84px; }
+  .nav-logo-img    { height: 101px; }
   .footer-logo-img { height: 80px; }
 
   #navbar          { padding: 4px 0; }
   #navbar.scrolled { padding: 4px 0; }
 
-  .hero-content    { padding-top: 110px; }
+  /* centraliza logo e posiciona hamburger à direita */
+  .nav-container   { position: relative; justify-content: center; }
+  .nav-toggle      { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); }
+
+  .hero-content    { padding-top: 135px; }
   .hero-badge      { margin-bottom: 20px; }
   .hero-subtitle   { margin: 0 auto 32px; }
   .hero-actions    { margin-bottom: 48px; }
@@ -1485,10 +1489,10 @@ textarea { resize: vertical; min-height: 108px; }
 @media (max-width: 480px) {
   :root { --section-gap: 56px; }
 
-  .nav-logo-img    { height: 74px; }
+  .nav-logo-img    { height: 89px; }
   .footer-logo-img { height: 62px; }
 
-  .hero-content    { padding-top: 90px; }
+  .hero-content    { padding-top: 115px; }
   .hero-title      { font-size: 2.3rem; }
   .hero-actions    { flex-direction: column; align-items: stretch; margin-bottom: 36px; }
   .btn-primary, .btn-ghost { justify-content: center; }
