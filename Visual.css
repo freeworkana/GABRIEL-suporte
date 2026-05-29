@@ -1448,7 +1448,7 @@ textarea { resize: vertical; min-height: 108px; }
   .nav-links, .nav-cta { display: none; }
   .nav-toggle          { display: flex; }
 
-  .nav-logo-img    { height: 64px; }
+  .nav-logo-img    { height: 70px; }
   .footer-logo-img { height: 80px; }
 
   #navbar          { padding: 4px 0; }
@@ -1485,7 +1485,7 @@ textarea { resize: vertical; min-height: 108px; }
 @media (max-width: 480px) {
   :root { --section-gap: 56px; }
 
-  .nav-logo-img    { height: 56px; }
+  .nav-logo-img    { height: 62px; }
   .footer-logo-img { height: 62px; }
 
   .hero-content    { padding-top: 90px; }
